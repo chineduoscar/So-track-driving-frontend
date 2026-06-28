@@ -5,22 +5,8 @@ import { FiCheckCircle } from "react-icons/fi";
 const About = () => {
   return (
     <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
-          <p className="text-[#00a057] text-xs font-bold uppercase tracking-widest mb-3">
-            About Us
-          </p>
-
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
-            Building Safe and Confident Drivers
-          </h2>
-
-          <p className="text-gray-500 text-sm max-w-xl mx-auto leading-relaxed">
-            We are committed to providing professional driver education that
-            helps learners become safe, confident, and responsible road users.
-          </p>
-        </div>
 
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
           {/* ── LEFT: Dual Image Cluster ── */}
@@ -55,12 +41,14 @@ const About = () => {
           </div>
 
           {/* ── RIGHT: Content ── */}
-          <div className="flex-1 pt-6 lg:pt-0">
-            <h3 className="text-4xl sm:text-5xl font-bold text-gray-900 leading-tight mb-5">
-              We Make Driving Easy
-            </h3>
-
-            <p className="text-gray-500 text-base leading-relaxed mb-6 max-w-lg">
+          <div className="flex-1">
+            <p className="text-[#00a057] text-xs font-bold uppercase tracking-widest mb-3">
+              About Us
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight mb-5">
+              Building Safe and Confident Drivers
+            </h2>
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">
               So-Track Driving School is one of Port Harcourt&apos;s most
               trusted driving schools. Our training is thorough, professional,
               and designed to build real confidence behind the wheel.
