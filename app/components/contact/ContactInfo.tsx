@@ -41,7 +41,7 @@ const ContactInfo = () => {
               <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-1">
                 {label}
               </p>
-              <p className="text-sm font-semibold text-gray-800 break-words">
+              <p className="text-sm font-semibold text-gray-800 wrap-break-word">
                 {value}
               </p>
             </div>
