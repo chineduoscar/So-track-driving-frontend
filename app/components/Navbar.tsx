@@ -12,7 +12,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    { name: "Location", href: "/location" },
+    { name: "Our Branches", href: "/location" },
     { name: "Contact", href: "/contact" },
   ];
 
@@ -57,8 +57,8 @@ const Navbar = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <a
-              href="#"
+            <Link
+              href="/locataion"
               className="flex items-center gap-1.5 w-full bg-[#333992] text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-all duration-300 hover:opacity-90 shadow-sm"
             >
               Get Started
@@ -75,7 +75,7 @@ const Navbar = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Hamburger */}
@@ -139,8 +139,8 @@ const Navbar = () => {
             );
           })}
           <div className="pt-2">
-            <a
-              href="#"
+            <Link
+              href="/location"
               className="flex items-center justify-center gap-1.5 w-full bg-[#333992] text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-all duration-300 hover:opacity-90 shadow-sm"
               onClick={() => setMenuOpen(false)}
             >
@@ -158,7 +158,7 @@ const Navbar = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       )}

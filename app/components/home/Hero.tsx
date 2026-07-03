@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { FiCheckCircle } from "react-icons/fi";
 
@@ -71,14 +72,14 @@ const Hero = () => {
   const rule = rules[current];
 
   return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gray-950">
+    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('heroImg.jpg')",
+          backgroundImage: "url('woman.jpg')",
         }}
       />
-      <div className="absolute inset-0 bg-linear-to-r from-black/90 via-gray-900/60 to-black/60" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#040222]/70 via-[#040222]/75 to-[#040222]/90" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
@@ -90,7 +91,7 @@ const Hero = () => {
                 4.7 / 5 Google Rating
               </span>
             </div>
-            <h1 className="text-3xl sm:text-6xl font-extrabold leading-tight mb-5 tracking-tight">
+            <h1 className="text-3xl sm:text-[54px] font-extrabold leading-tight mb-5 tracking-tight">
               Learn to Drive with Confidence
             </h1>
 
@@ -101,18 +102,18 @@ const Hero = () => {
 
             <div className="flex gap-3 mb-8">
               <a
-                href="#"
-                className="px-6 py-3 rounded-full bg-[#333992] hover:opacity-80 text-white font-semibold text-sm transition-colors duration-200 shadow-lg"
+                href="#find-branch"
+                className="px-6 py-3 rounded-full bg-[#333992] hover:bg-[#222765] text-white font-semibold text-sm transition-colors duration-200 shadow-lg"
               >
-                View Pricing
+                Get started
               </a>
 
-              <a
-                href="#"
+              <Link
+                href={"/contact"}
                 className="px-6 py-3 rounded-full border-2 border-white text-white font-semibold text-sm hover:bg-white hover:text-gray-900 transition-colors duration-200"
               >
-                Get Started
-              </a>
+                Contact Us
+              </Link>
             </div>
 
             <div className="flex flex-wrap gap-5">

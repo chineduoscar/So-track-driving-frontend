@@ -7,12 +7,12 @@ const ServicesHero = () => {
         </span>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight">
-          Driving lessons built around you
+          Complete Driving and Licensing Solutions
         </h1>
 
         <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-          Whatever your experience level, we have a structured programme to get
-          you driving safely and confidently.
+          Professional driving training, licensing services, defensive driving
+          programmes, and experienced drivers all under one roof.
         </p>
       </div>
     </section>

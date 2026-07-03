@@ -7,46 +7,55 @@ const locations = [
     name: "SO-TRACK Mile 3",
     address: "Mile 3, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Choba",
     address: "Choba, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Rumuokoro",
     address: "Rumuokoro, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Ada George",
     address: "Ada George, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Woji",
     address: "Woji, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Eliozu",
     address: "Eliozu, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK GRA",
     address: "GRA Phase 2, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Trans Amadi",
     address: "Trans Amadi, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
   {
     name: "SO-TRACK Borokiri",
     address: "Borokiri, Port Harcourt",
     phone: "08074627327",
+    price: "₦45,000",
   },
 ];
 
@@ -62,15 +71,15 @@ const FindBranch = () => {
   const displayedLocations = query.trim() ? filtered : locations.slice(0, 3);
 
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8" id="find-branch">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-10">
-          <p className="text-[#333992] text-xs font-bold uppercase tracking-widest mb-3">
+          <p className="text-[#00a057] text-xs font-bold uppercase tracking-widest mb-3">
             Find Your Branch
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            Find the nearest SO-TRACK branch
+            Find the nearest So-track branch
           </h2>
           <p className="text-gray-500 text-sm">
             We have multiple training centres across Port Harcourt. Search by
@@ -106,9 +115,16 @@ const FindBranch = () => {
                 {loc.name}
               </h3>
 
-              <p className="flex items-center gap-2 text-sm text-gray-500 mb-5">
+              <p className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                 <FiMapPin className="text-[#00a057] shrink-0" />
                 {loc.address}
+              </p>
+
+              <p className="text-sm text-gray-900 font-bold mb-5">
+                {loc.price}{" "}
+                <span className="text-gray-400 font-normal text-xs">
+                  full course
+                </span>
               </p>
 
               <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
@@ -120,7 +136,7 @@ const FindBranch = () => {
                   {loc.phone}
                 </a>
 
-                <button className="text-[#00a057] font-semibold text-sm hover:underline">
+                <button className="text-[#00a057] font-semibold text-sm hover:underline cursor-pointer">
                   Book Now →
                 </button>
               </div>

@@ -7,12 +7,13 @@ const ContactHero = () => {
         </span>
 
         <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-5 leading-tight">
-          Book your driving lessons
+          Get in Touch With Our Team
         </h1>
 
         <p className="text-white/70 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
-          Reach out and our team will get you scheduled at your nearest branch
-          within 24 hours.
+          Whether you&apos;re interested in driving training, licensing
+          services, professional drivers, or general enquiries, our team is
+          ready to assist you.
         </p>
       </div>
     </section>

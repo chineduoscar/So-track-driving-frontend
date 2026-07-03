@@ -28,7 +28,7 @@ const QUICK_LINKS = [
   { name: "Home", href: "/" },
   { name: "About", href: "/about" },
   { name: "Services", href: "/services" },
-  { name: "Locations", href: "/locations" },
+  { name: "Our Branches", href: "/locations" },
   { name: "Contact", href: "/contact" },
 ];
 

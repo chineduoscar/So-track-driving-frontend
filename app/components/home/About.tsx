@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { FiCheckCircle } from "react-icons/fi";
+import Link from "next/link";
 
 const About = () => {
   return (
@@ -70,8 +71,8 @@ const About = () => {
               ))}
             </ul>
 
-            <a
-              href="#"
+            <Link
+              href={"/about"}
               className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-[#333992] hover:opacity-80 text-white font-semibold text-sm transition-opacity duration-200 shadow-lg"
             >
               Read more
@@ -88,7 +89,7 @@ const About = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -68,7 +68,7 @@ const AllLocations = () => {
             All Branches
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            Find a SO-TRACK branch near you
+            Find a So-track branch near you
           </h1>
           <p className="text-gray-500 text-sm max-w-xl mx-auto">
             {locations.length} training centres across Port Harcourt. Search by

@@ -72,7 +72,7 @@ const TrainingVehicles = () => {
                 {/* CTA */}
                 <div className="mt-auto">
                   <a
-                    href="/contact"
+                    href="#find-branch"
                     className="inline-flex items-center gap-2 text-sm font-semibold text-[#00a057] hover:gap-3 transition-all duration-150"
                   >
                     Enrol Now

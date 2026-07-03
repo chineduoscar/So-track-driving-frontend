@@ -16,8 +16,8 @@ const steps = [
   },
   {
     number: "04",
-    title: "Schedule Lessons & Start Driving",
-    desc: "Pick lesson times that fit your week, get behind the wheel, and build real confidence.",
+    title: "We Contact You",
+    desc: "Our team will get in touch to confirm your registration, and guide you on the next steps.",
   },
 ];
 
@@ -66,7 +66,7 @@ const HowItWorks = () => {
         {/* CTA */}
         <div className="flex justify-center mt-14">
           <a
-            href="#"
+            href="#find-branch"
             className="px-8 py-3 rounded-full bg-[#333992] hover:opacity-90 text-white text-sm font-semibold transition-opacity duration-200 shadow"
           >
             Get Started Today

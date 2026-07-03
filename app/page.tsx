@@ -10,7 +10,7 @@ import CTA from "./components/home/CTA";
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
       <Hero />
       <FindBranch />
       <TrainingVehicles />
