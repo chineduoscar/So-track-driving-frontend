@@ -94,7 +94,7 @@ const ServiceModal = ({
           href={"/contact"}
           className="block text-center bg-[#00a057] hover:bg-[#008f4c] text-white font-semibold text-sm px-6 py-3 rounded-full transition-colors duration-200"
         >
-          Book this service
+          Contact Us for This Service
         </Link>
       </div>
     </div>
