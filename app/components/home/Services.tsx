@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
-import ServiceModal, {
-  ServiceModalData,
-} from "../../components/Modal/ServiceModal";
+import ServiceModal, { ServiceModalData } from "../modal/ServiceModal";
 import services from "../../data/services";
 
 const ServiceCard = ({

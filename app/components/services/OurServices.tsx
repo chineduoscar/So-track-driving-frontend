@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FiCheckCircle } from "react-icons/fi";
 import services from "../../data/services";
-import ServiceModal from "../../components/Modal/ServiceModal";
+import ServiceModal from "../modal/ServiceModal";
 
 const ServiceCard = ({
   s,
