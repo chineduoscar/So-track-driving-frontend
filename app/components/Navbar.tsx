@@ -58,7 +58,7 @@ const Navbar = () => {
           {/* Desktop CTA */}
           <div className="hidden md:block">
             <Link
-              href="/locataion"
+              href="/location"
               className="flex items-center gap-1.5 w-full bg-[#333992] text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-all duration-300 hover:opacity-90 shadow-sm"
             >
               Get Started
