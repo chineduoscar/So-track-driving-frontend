@@ -4,6 +4,8 @@ export interface Zone {
   lga: string;
   phoneNumber: string;
   price: number;
+  lat: number;
+  lng: number;
   locations: string[];
 }
 
@@ -14,6 +16,8 @@ export const zones: Zone[] = [
     lga: "PHALGA",
     phoneNumber: "08037466270",
     price: 50000,
+    lat: 4.815,
+    lng: 7.030,
     locations: ["Old GRA", "Secretariat", "Civic Centre"],
   },
   {
@@ -22,6 +26,8 @@ export const zones: Zone[] = [
     lga: "PHALGA",
     phoneNumber: "08037466270",
     price: 50000,
+    lat: 4.800,
+    lng: 7.015,
     locations: ["Diobu", "D-Line", "Mile 1", "Mile 2"],
   },
   {
@@ -30,6 +36,8 @@ export const zones: Zone[] = [
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
     price: 60000,
+    lat: 4.865,
+    lng: 6.980,
     locations: ["Mile 4", "Agip", "Ada George", "Wimpey"],
   },
   {
@@ -38,6 +46,8 @@ export const zones: Zone[] = [
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
     price: 60000,
+    lat: 4.900,
+    lng: 6.920,
     locations: ["East-West Road", "Obiri-Ikwerre", "Uniport Axis"],
   },
   {
@@ -46,6 +56,8 @@ export const zones: Zone[] = [
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
     price: 70000,
+    lat: 4.890,
+    lng: 7.020,
     locations: [
       "Eliozu",
       "SARS Road",
@@ -62,6 +74,8 @@ export const zones: Zone[] = [
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
     price: 70000,
+    lat: 4.860,
+    lng: 7.040,
     locations: [
       "Okporo",
       "Artillery",
@@ -77,6 +91,8 @@ export const zones: Zone[] = [
     lga: "PHALGA",
     phoneNumber: "08037466270",
     price: 50000,
+    lat: 4.820,
+    lng: 7.025,
     locations: ["Old GRA"],
   },
   {
@@ -85,6 +101,8 @@ export const zones: Zone[] = [
     lga: "PHALGA / Obio-Akpor",
     phoneNumber: "08037466270",
     price: 65000,
+    lat: 4.845,
+    lng: 7.010,
     locations: [
       "New GRA",
       "Olu Obasanjo Road",
@@ -100,6 +118,8 @@ export const zones: Zone[] = [
     lga: "Ikwerre",
     phoneNumber: "08037466270",
     price: 70000,
+    lat: 4.950,
+    lng: 7.050,
     locations: ["Obibo"],
   },
 ];

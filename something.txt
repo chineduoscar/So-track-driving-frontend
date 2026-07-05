@@ -9,3 +9,78 @@
 | 7   | Old GRA                                                                |
 | 8   | New GRA, Olu Obasanjo Road, Orazi, Secretariat Road, Rumuigbo, Rumuola |
 | 9   | Obibo                                                          |
+
+
+User starts typing
+
+↓
+
+Autocomplete from your PH locations list
+
+↓
+
+User selects location
+
+↓
+
+Show Zone
+
+OR
+
+↓
+
+User types a location not in your list
+
+↓
+
+Search Nominatim
+
+↓
+
+Location found
+
+↓
+
+Get coordinates
+
+↓
+
+Find nearest zone
+
+↓
+
+Show Zone
+
+OR
+
+↓
+
+Location not found
+
+↓
+
+Show message:
+
+"We couldn't find that location.
+Please select a nearby popular area."
+
+↓
+
+Display suggestions:
+
+• Rumuokoro
+• Ada George
+• Choba
+• Woji
+• Eliozu
+• Mile 3
+• GRA
+• Trans Amadi
+
+↓
+
+User selects one
+
+↓
+
+Show Zone

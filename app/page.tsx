@@ -1,7 +1,7 @@
 import Hero from "./components/home/Hero";
 import Reviews from "./components/home/Reviews";
 import About from "./components/home/About";
-import FindBranch from "./components/home/FindBranch";
+import FindZone from "./components/home/FindZone";
 import TrainingVehicles from "./components/home/TrainingVehicles";
 import Services from "./components/home/Services";
 import HowItWorks from "./components/home/HowItWorks";
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div>
       <Hero />
-      <FindBranch />
+      <FindZone />
       <TrainingVehicles />
       <About />
       <Services />

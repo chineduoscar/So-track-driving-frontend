@@ -19,10 +19,10 @@ const CTA = () => {
             Contact Us
           </Link>
           <Link
-            href="/location"
+            href="/zones"
             className="px-6 py-2.5 rounded-lg border border-white/30 hover:bg-white/10 text-white text-sm font-semibold transition-colors duration-200"
           >
-            Find A Location
+            Find A Zone
           </Link>
         </div>
       </div>

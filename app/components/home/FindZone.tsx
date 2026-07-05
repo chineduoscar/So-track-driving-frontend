@@ -2,29 +2,38 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import {
-  FiSearch,
-  FiMapPin,
-  FiPhone,
-  FiTag,
-  FiArrowRight,
-} from "react-icons/fi";
+import { FiMapPin, FiPhone, FiTag, FiArrowRight } from "react-icons/fi";
 import { zones } from "../../data/zones";
+import ZoneSearch from "../location/LocationSearch";
+import { useRouter } from "next/navigation";
 
-const FindBranch = () => {
+const FindZone = () => {
   const [query, setQuery] = useState("");
+  const [selectedZoneId, setSelectedZoneId] = useState<number | null>(null);
+  const router = useRouter();
 
-  const filteredZones = zones.filter((zone) => {
-    const search = query.toLowerCase();
+  const handleSearchChange = (newQuery: string, zoneId: number | null) => {
+    setQuery(newQuery);
+    setSelectedZoneId(zoneId);
+  };
 
-    return (
-      zone.name.toLowerCase().includes(search) ||
-      zone.lga.toLowerCase().includes(search) ||
-      zone.locations.some((location) => location.toLowerCase().includes(search))
-    );
-  });
+  const filteredZones = selectedZoneId
+    ? zones.filter((zone) => zone.id === selectedZoneId)
+    : zones.filter((zone) => {
+        const search = query.toLowerCase();
 
-  const displayedZones = query.trim() ? filteredZones : zones.slice(0, 3);
+        return (
+          zone.name.toLowerCase().includes(search) ||
+          zone.lga.toLowerCase().includes(search) ||
+          zone.locations.some((location) =>
+            location.toLowerCase().includes(search),
+          )
+        );
+      });
+
+  const displayedZones = query.trim()
+    ? filteredZones.slice(0, 3)
+    : zones.slice(0, 3);
 
   return (
     <section className="bg-white py-24 px-4 sm:px-6 lg:px-8" id="find-zone">
@@ -46,28 +55,15 @@ const FindBranch = () => {
         </div>
 
         {/* Search */}
-        <div className="max-w-xl mx-auto mb-14">
-          <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm focus-within:border-[#00a057] focus-within:ring-2 focus-within:ring-[#00a057]/15 transition">
-            <FiSearch className="text-gray-400 shrink-0" size={18} />
-
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by area, zone or LGA..."
-              className="w-full text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
-            />
-          </div>
-        </div>
+        <ZoneSearch onSearchChange={handleSearchChange} />
 
         {/* Zone Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayedZones.map((zone) => (
             <div
               key={zone.id}
-              className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-[#00a057]/30 hover:-translate-y-0.5 transition-all duration-200"
+              className="group flex flex-col bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-[#00a057]/30 hover:-translate-y-0.5 transition-all duration-200"
             >
-              {/* Header */}
               <div className="mb-5">
                 <h3 className="flex items-center gap-1.5 text-xl text-gray-900 leading-snug mb-3">
                   <span className="font-bold">{zone.name}</span>
@@ -89,7 +85,6 @@ const FindBranch = () => {
                 </div>
               </div>
 
-              {/* Locations */}
               <div className="rounded-xl p-4 bg-gray-50 mb-5">
                 <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                   Covered Locations
@@ -107,8 +102,7 @@ const FindBranch = () => {
                 </div>
               </div>
 
-              {/* Footer */}
-              <div className="flex items-center justify-between pt-1">
+              <div className="mt-auto flex items-center justify-between pt-5">
                 <a
                   href={`tel:${zone.phoneNumber}`}
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
@@ -117,7 +111,13 @@ const FindBranch = () => {
                   {zone.phoneNumber}
                 </a>
 
-                <button className="group flex items-center gap-1.5 text-sm font-bold text-[#00a057] hover:text-[#008c4b] transition-colors cursor-pointer">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    router.push(`/zones/${zone.id}`);
+                  }}
+                  className="group flex items-center gap-1.5 text-sm font-bold text-[#00a057] hover:text-[#008c4b] transition-colors cursor-pointer"
+                >
                   Book Now
                   <FiArrowRight
                     className="group-hover:translate-x-0.5 transition-transform"
@@ -130,7 +130,11 @@ const FindBranch = () => {
 
           {query.trim() && filteredZones.length === 0 && (
             <div className="col-span-full text-center py-14 text-gray-500">
-              No zone found for &ldquo;{query}&rdquo;
+              No zone found for &ldquo;{query}&rdquo;.
+              <br />
+              <span className="text-sm">
+                Try searching for a popular location around you.
+              </span>
             </div>
           )}
         </div>
@@ -138,7 +142,7 @@ const FindBranch = () => {
         {/* See all zones */}
         <div className="flex justify-center mt-12">
           <Link
-            href="/locations"
+            href="/zones"
             className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-800 bg-white border border-gray-300 px-6 py-3 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-colors"
           >
             View all locations
@@ -153,4 +157,4 @@ const FindBranch = () => {
   );
 };
 
-export default FindBranch;
+export default FindZone;

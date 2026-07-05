@@ -10,18 +10,18 @@ import {
   FiTruck,
 } from "react-icons/fi";
 
-const location = {
-  name: "SO-TRACK Mile 3",
-  zone: "Mile 3, Port Harcourt",
-  phone: "08074627327",
-  hours: "Mon – Sat, 8:00am – 5:00pm",
-};
+interface Zone {
+  id: number;
+  name: string;
+  lga: string;
+  price: number;
+  locations: string[];
+  phoneNumber: string;
+}
 
-const service = {
-  name: "Driving Lessons",
-  duration: "2 weeks",
-  price: 45000,
-};
+interface SingleLocationProps {
+  zone: Zone;
+}
 
 const included = [
   "Practical lessons with a certified instructor",
@@ -39,10 +39,10 @@ const stats = [
 
 const formatNaira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
 
-const SingleLocation = () => {
+const SingleLocation = ({ zone }: SingleLocationProps) => {
   const handlePay = () => {
     // TODO: hook up real payment provider (Paystack/Flutterwave etc.)
-    console.log("Pay for:", service);
+    console.log("Pay for zone:", zone.id);
   };
 
   return (
@@ -54,25 +54,36 @@ const SingleLocation = () => {
             Zone
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
-            {location.name}
+            {zone.name}
           </h1>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm text-gray-500">
             <span className="flex items-center gap-2">
               <FiMapPin className="text-[#00a057]" />
-              {location.zone}
+              {zone.lga}
             </span>
             <a
-              href={`tel:${location.phone}`}
+              href={`tel:${zone.phoneNumber}`}
               className="flex items-center gap-2 hover:text-gray-900 transition-colors"
             >
               <FiPhone className="text-[#00a057]" />
-              {location.phone}
+              {zone.phoneNumber}
             </a>
             <span className="flex items-center gap-2">
               <FiClock className="text-[#00a057]" />
-              {location.hours}
+              Mon - Sat, 8:00am - 5:00pm
             </span>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-2 mt-5">
+            {zone.locations.map((location) => (
+              <span
+                key={location}
+                className="px-3 py-1.5 rounded-full bg-gray-50 border border-gray-200 text-sm text-gray-700"
+              >
+                {location}
+              </span>
+            ))}
           </div>
         </div>
 
@@ -97,10 +108,10 @@ const SingleLocation = () => {
           {/* Left: what's included */}
           <div className="md:col-span-3 p-6 sm:p-8">
             <h2 className="font-bold text-gray-900 text-lg mb-1">
-              {service.name}
+              Driving Lessons
             </h2>
             <p className="text-xs text-gray-400 mb-6">
-              {service.duration} course · {location.name}
+              2 weeks course · {zone.name}
             </p>
 
             <p className="text-xs font-bold text-gray-900 uppercase tracking-wide mb-3">
@@ -126,19 +137,19 @@ const SingleLocation = () => {
                 Course fee
               </p>
               <p className="font-extrabold text-white text-3xl mb-6">
-                {formatNaira(service.price)}
+                {formatNaira(zone.price)}
               </p>
             </div>
 
             <div>
               <button
                 onClick={handlePay}
-                className="w-full flex items-center justify-center gap-2 bg-[#00a057] text-white font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#008f4c] transition-colors mb-3"
+                className="w-full flex items-center justify-center gap-2 bg-[#00a057] text-white font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#008f4c] transition-colors mb-3 cursor-pointer"
               >
-                <FiCreditCard /> Pay {formatNaira(service.price)}
+                <FiCreditCard /> Pay {formatNaira(zone.price)}
               </button>
               <a
-                href={`tel:${location.phone}`}
+                href={`tel:${zone.phoneNumber}`}
                 className="w-full flex items-center justify-center gap-2 border border-white/20 text-white/80 font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
               >
                 <FiPhone size={14} /> Call to book instead

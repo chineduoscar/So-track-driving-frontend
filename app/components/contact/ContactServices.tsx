@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const branches = [
+const zones = [
   "Mile 3",
   "Choba",
   "Rumuokoro",
@@ -40,7 +40,7 @@ const ContactSection = () => {
     fullName: "",
     phone: "",
     email: "",
-    branch: "",
+    zone: "",
     service: "",
     message: "",
   });
@@ -118,13 +118,13 @@ const ContactSection = () => {
                   Preferred location
                 </label>
                 <select
-                  name="branch"
-                  value={form.branch}
+                  name="zone"
+                  value={form.zone}
                   onChange={handleChange}
                   className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] text-gray-500 bg-white"
                 >
                   <option value="">Select a zone</option>
-                  {branches.map((b) => (
+                  {zones.map((b) => (
                     <option key={b} value={b}>
                       {b}
                     </option>
