@@ -123,7 +123,7 @@ const ContactSection = () => {
                   onChange={handleChange}
                   className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] text-gray-500 bg-white"
                 >
-                  <option value="">Select a branch</option>
+                  <option value="">Select a zone</option>
                   {branches.map((b) => (
                     <option key={b} value={b}>
                       {b}

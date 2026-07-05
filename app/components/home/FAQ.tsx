@@ -4,7 +4,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "How do I book my first lesson?",
-    a: "You can book your first lesson by selecting your nearest branch, filling in your details, and choosing a time that works for you. You can also reach us by call or WhatsApp.",
+    a: "You can book your first lesson by selecting your nearest zone, filling in your details, and choosing a time that works for you. You can also reach us by call or WhatsApp.",
   },
   {
     q: "Do you offer both automatic and manual cars?",
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "What if I need to reschedule a lesson?",
-    a: "No problem. You can reschedule up to 24 hours before your lesson at no extra charge. Just contact your branch directly or use our online portal.",
+    a: "No problem. You can reschedule up to 24 hours before your lesson at no extra charge. Just contact your zone directly or use our online portal.",
   },
   {
     q: "Do you help with the official driving test?",

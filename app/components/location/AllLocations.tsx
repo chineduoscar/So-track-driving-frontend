@@ -65,14 +65,14 @@ const AllLocations = () => {
         {/* Heading */}
         <div className="text-center mb-10">
           <p className="text-[#333992] text-xs font-bold uppercase tracking-widest mb-3">
-            All Branches
+            All Zones
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            Find a So-track branch near you
+            Find a So-track zone near you
           </h1>
           <p className="text-gray-500 text-sm max-w-xl mx-auto">
             {locations.length} training centres across Port Harcourt. Search by
-            area to find the branch closest to you.
+            area to find the zone closest to you.
           </p>
         </div>
 

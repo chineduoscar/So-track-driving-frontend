@@ -98,7 +98,7 @@ const Hero = () => {
 
             <div className="flex gap-3 mb-8">
               <a
-                href="#find-branch"
+                href="#find-zone"
                 className="px-6 py-3 rounded-full bg-[#333992] hover:bg-[#222765] text-white font-semibold text-sm transition-colors duration-200 shadow-lg"
               >
                 Get started

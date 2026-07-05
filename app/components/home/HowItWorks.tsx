@@ -2,7 +2,7 @@ const steps = [
   {
     number: "01",
     title: "Select Location",
-    desc: "Find the So-track branch closest to you and choose your preferred training centre.",
+    desc: "Find the So-track zone closest to you and choose your preferred training centre.",
   },
   {
     number: "02",
@@ -66,7 +66,7 @@ const HowItWorks = () => {
         {/* CTA */}
         <div className="flex justify-center mt-14">
           <a
-            href="#find-branch"
+            href="#find-zone"
             className="px-8 py-3 rounded-full bg-[#333992] hover:opacity-90 text-white text-sm font-semibold transition-opacity duration-200 shadow"
           >
             Get Started Today

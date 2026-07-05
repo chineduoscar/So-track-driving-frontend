@@ -71,19 +71,19 @@ const FindBranch = () => {
   const displayedLocations = query.trim() ? filtered : locations.slice(0, 3);
 
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8" id="find-branch">
+    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8" id="find-zone">
       <div className="max-w-5xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-10">
           <p className="text-[#00a057] text-xs font-bold uppercase tracking-widest mb-3">
-            Find Your Branch
+            Find Your zone
           </p>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-            Find the nearest So-track branch
+            Find the nearest So-track zone
           </h2>
           <p className="text-gray-500 text-sm">
             We have multiple training centres across Port Harcourt. Search by
-            area to find the branch closest to you.
+            area to find the zone closest to you.
           </p>
         </div>
 

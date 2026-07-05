@@ -34,7 +34,7 @@ const included = [
 const stats = [
   { icon: FiUsers, value: "3000+", label: "Students trained" },
   { icon: FiAward, value: "98%", label: "Pass rate" },
-  { icon: FiTruck, value: "9", label: "Branches citywide" },
+  { icon: FiTruck, value: "9", label: "Zones citywide" },
 ];
 
 const formatNaira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
@@ -51,7 +51,7 @@ const SingleLocation = () => {
         {/* Location header */}
         <div className="text-center mb-12">
           <p className="text-[#333992] text-xs font-bold uppercase tracking-widest mb-3">
-            Branch
+            Zone
           </p>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">
             {location.name}
