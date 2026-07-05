@@ -30,7 +30,7 @@ const contactItems = [
 
 const ContactInfo = () => {
   return (
-    <section className="bg-gray-50 py-14 px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-14 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {contactItems.map(({ icon: Icon, label, value, href }) => {
           const content = (

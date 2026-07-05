@@ -4,13 +4,13 @@ import Image from "next/image";
 
 const vehicles = [
   {
-    image: "/automatic-car.png",
+    image: "/carTwo.jpg",
     badge: "Most Popular",
     title: "Automatic Driving Lessons",
     desc: "Learn to drive confidently in modern automatic vehicles. Ideal for beginners looking for a simpler and more comfortable driving experience.",
   },
   {
-    image: "/manual-car.png",
+    image: "/carOne.jpg",
     badge: "Full Training",
     title: "Manual Driving Lessons",
     desc: "Master manual transmission driving and gain complete vehicle control with hands-on practical training from certified instructors.",
