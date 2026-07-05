@@ -73,12 +73,8 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage: "url('woman.jpg')",
-        }}
-      />
+      <div className="absolute inset-0 bg-[url('/mobile-heroImage.jpg')] md:bg-[url('/heroImage.jpg')] bg-cover bg-center bg-no-repeat" />
+
       <div className="absolute inset-0 bg-linear-to-r from-[#040222]/70 via-[#040222]/75 to-[#040222]/90" />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
