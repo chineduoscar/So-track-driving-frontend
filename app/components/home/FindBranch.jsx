@@ -1,163 +1,152 @@
 "use client";
-import { useState } from "react";
-import { FiSearch, FiMapPin, FiPhone } from "react-icons/fi";
 
-const locations = [
-  {
-    name: "SO-TRACK Mile 3",
-    address: "Mile 3, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Choba",
-    address: "Choba, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Rumuokoro",
-    address: "Rumuokoro, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Ada George",
-    address: "Ada George, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Woji",
-    address: "Woji, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Eliozu",
-    address: "Eliozu, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK GRA",
-    address: "GRA Phase 2, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Trans Amadi",
-    address: "Trans Amadi, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-  {
-    name: "SO-TRACK Borokiri",
-    address: "Borokiri, Port Harcourt",
-    phone: "08074627327",
-    price: "₦45,000",
-  },
-];
+import { useState } from "react";
+import Link from "next/link";
+import {
+  FiSearch,
+  FiMapPin,
+  FiPhone,
+  FiTag,
+  FiArrowRight,
+} from "react-icons/fi";
+import { zones } from "../../data/zones";
 
 const FindBranch = () => {
   const [query, setQuery] = useState("");
 
-  const filtered = locations.filter(
-    (location) =>
-      location.name.toLowerCase().includes(query.toLowerCase()) ||
-      location.address.toLowerCase().includes(query.toLowerCase()),
-  );
+  const filteredZones = zones.filter((zone) => {
+    const search = query.toLowerCase();
 
-  const displayedLocations = query.trim() ? filtered : locations.slice(0, 3);
+    return (
+      zone.name.toLowerCase().includes(search) ||
+      zone.lga.toLowerCase().includes(search) ||
+      zone.locations.some((location) => location.toLowerCase().includes(search))
+    );
+  });
+
+  const displayedZones = query.trim() ? filteredZones : zones.slice(0, 3);
 
   return (
-    <section className="bg-white py-20 px-4 sm:px-6 lg:px-8" id="find-zone">
-      <div className="max-w-5xl mx-auto">
+    <section className="bg-white py-24 px-4 sm:px-6 lg:px-8" id="find-zone">
+      <div className="max-w-6xl mx-auto">
         {/* Heading */}
-        <div className="text-center mb-10">
-          <p className="text-[#00a057] text-xs font-bold uppercase tracking-widest mb-3">
-            Find Your zone
+        <div className="text-center mb-12">
+          <p className="inline-flex items-center gap-2 text-[#00a057] text-xs font-bold uppercase tracking-[0.2em] mb-4">
+            Find Your Zone
           </p>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
+
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 tracking-tight">
             Find the nearest So-track zone
           </h2>
-          <p className="text-gray-500 text-sm">
-            We have multiple training centres across Port Harcourt. Search by
-            area to find the zone closest to you.
+
+          <p className="text-gray-500 text-sm max-w-xl mx-auto">
+            Search by area, neighbourhood, or zone name to find the closest
+            training centre to you.
           </p>
         </div>
 
-        {/* Search bar */}
-        <div className="flex items-center gap-2 max-w-lg mx-auto mb-12">
-          <div className="flex-1 flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-2.5 shadow-sm">
-            <FiSearch className="text-gray-400 shrink-0" />
+        {/* Search */}
+        <div className="max-w-xl mx-auto mb-14">
+          <div className="flex items-center gap-3 bg-white border border-gray-200 rounded-2xl px-5 py-4 shadow-sm focus-within:border-[#00a057] focus-within:ring-2 focus-within:ring-[#00a057]/15 transition">
+            <FiSearch className="text-gray-400 shrink-0" size={18} />
+
             <input
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by city or neighbourhood..."
+              placeholder="Search by area, zone or LGA..."
               className="w-full text-sm text-gray-700 placeholder-gray-400 outline-none bg-transparent"
             />
           </div>
-          <button className="px-5 py-2.5 bg-[#333992] hover:opacity-90 text-white text-sm font-semibold rounded-lg transition-opacity duration-200 shadow-sm">
-            Search
-          </button>
         </div>
 
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
-          {displayedLocations.map((loc) => (
+        {/* Zone Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {displayedZones.map((zone) => (
             <div
-              key={loc.name}
-              className="bg-white border border-gray-200 rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow duration-200"
+              key={zone.id}
+              className="group bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:border-[#00a057]/30 hover:-translate-y-0.5 transition-all duration-200"
             >
-              <h3 className="font-bold text-gray-900 text-lg mb-3">
-                {loc.name}
-              </h3>
+              {/* Header */}
+              <div className="mb-5">
+                <h3 className="flex items-center gap-1.5 text-xl text-gray-900 leading-snug mb-3">
+                  <span className="font-bold">{zone.name}</span>
+                  <span className="text-gray-400 font-medium">/</span>
+                  <span className="flex items-center gap-1 text-sm font-medium text-gray-400">
+                    <FiMapPin size={13} />
+                    {zone.lga}
+                  </span>
+                </h3>
 
-              <p className="flex items-center gap-2 text-sm text-gray-500 mb-3">
-                <FiMapPin className="text-[#00a057] shrink-0" />
-                {loc.address}
-              </p>
+                <div className="flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-4 py-3">
+                  <span className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wide">
+                    <FiTag size={13} className="text-[#00a057]" />
+                    Price
+                  </span>
+                  <span className="text-[#00a057] text-lg font-extrabold">
+                    ₦{zone.price.toLocaleString()}
+                  </span>
+                </div>
+              </div>
 
-              <p className="text-sm text-gray-900 font-bold mb-5">
-                {loc.price}{" "}
-                <span className="text-gray-400 font-normal text-xs">
-                  full course
-                </span>
-              </p>
+              {/* Locations */}
+              <div className="rounded-xl p-4 bg-gray-50 mb-5">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                  Covered Locations
+                </p>
 
-              <div className="border-t border-gray-100 pt-4 flex items-center justify-between">
+                <div className="flex flex-wrap gap-2">
+                  {zone.locations.map((location) => (
+                    <span
+                      key={location}
+                      className="px-3 py-1.5 rounded-full bg-white border border-gray-200 text-sm text-gray-700"
+                    >
+                      {location}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer */}
+              <div className="flex items-center justify-between pt-1">
                 <a
-                  href={`tel:${loc.phone}`}
+                  href={`tel:${zone.phoneNumber}`}
                   className="flex items-center gap-2 text-sm text-gray-600 hover:text-gray-900 transition-colors"
                 >
-                  <FiPhone />
-                  {loc.phone}
+                  <FiPhone size={15} />
+                  {zone.phoneNumber}
                 </a>
 
-                <button className="text-[#00a057] font-semibold text-sm hover:underline cursor-pointer">
-                  Book Now →
+                <button className="group flex items-center gap-1.5 text-sm font-bold text-[#00a057] hover:text-[#008c4b] transition-colors cursor-pointer">
+                  Book Now
+                  <FiArrowRight
+                    className="group-hover:translate-x-0.5 transition-transform"
+                    size={15}
+                  />
                 </button>
               </div>
             </div>
           ))}
 
-          {query.trim() && filtered.length === 0 && (
-            <p className="col-span-3 text-center text-gray-400 text-sm py-10">
-              No locations found for {query}.
-            </p>
+          {query.trim() && filteredZones.length === 0 && (
+            <div className="col-span-full text-center py-14 text-gray-500">
+              No zone found for &ldquo;{query}&rdquo;
+            </div>
           )}
         </div>
 
-        {/* View all */}
-        <div className="flex justify-center">
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 border border-gray-300 hover:border-gray-400 text-gray-700 text-sm font-medium px-6 py-2.5 rounded-full transition-colors duration-150"
+        {/* See all zones */}
+        <div className="flex justify-center mt-12">
+          <Link
+            href="/locations"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-800 bg-white border border-gray-300 px-6 py-3 rounded-full hover:border-gray-400 hover:bg-gray-50 transition-colors"
           >
-            View all locations →
-          </a>
+            View all locations
+            <FiArrowRight
+              className="group-hover:translate-x-0.5 transition-transform"
+              size={16}
+            />
+          </Link>
         </div>
       </div>
     </section>

@@ -13,7 +13,7 @@ export const zones: Zone[] = [
     name: "Zone 1",
     lga: "PHALGA",
     phoneNumber: "08037466270",
-    price: 5000,
+    price: 50000,
     locations: ["Old GRA", "Secretariat", "Civic Centre"],
   },
   {
@@ -21,7 +21,7 @@ export const zones: Zone[] = [
     name: "Zone 2",
     lga: "PHALGA",
     phoneNumber: "08037466270",
-    price: 5000,
+    price: 50000,
     locations: ["Diobu", "D-Line", "Mile 1", "Mile 2"],
   },
   {
@@ -29,7 +29,7 @@ export const zones: Zone[] = [
     name: "Zone 3",
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
-    price: 6000,
+    price: 60000,
     locations: ["Mile 4", "Agip", "Ada George", "Wimpey"],
   },
   {
@@ -37,7 +37,7 @@ export const zones: Zone[] = [
     name: "Zone 4",
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
-    price: 6000,
+    price: 60000,
     locations: ["East-West Road", "Obiri-Ikwerre", "Uniport Axis"],
   },
   {
@@ -45,7 +45,7 @@ export const zones: Zone[] = [
     name: "Zone 5",
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
-    price: 7000,
+    price: 70000,
     locations: [
       "Eliozu",
       "SARS Road",
@@ -61,7 +61,7 @@ export const zones: Zone[] = [
     name: "Zone 6",
     lga: "Obio-Akpor",
     phoneNumber: "08037466270",
-    price: 7000,
+    price: 70000,
     locations: [
       "Okporo",
       "Artillery",
@@ -76,7 +76,7 @@ export const zones: Zone[] = [
     name: "Zone 7",
     lga: "PHALGA",
     phoneNumber: "08037466270",
-    price: 5000,
+    price: 50000,
     locations: ["Old GRA"],
   },
   {
@@ -84,7 +84,7 @@ export const zones: Zone[] = [
     name: "Zone 8",
     lga: "PHALGA / Obio-Akpor",
     phoneNumber: "08037466270",
-    price: 6500,
+    price: 65000,
     locations: [
       "New GRA",
       "Olu Obasanjo Road",
@@ -99,7 +99,7 @@ export const zones: Zone[] = [
     name: "Zone 9",
     lga: "Ikwerre",
     phoneNumber: "08037466270",
-    price: 8000,
+    price: 70000,
     locations: ["Obibo"],
   },
 ];
