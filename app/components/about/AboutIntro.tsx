@@ -11,11 +11,11 @@ const AboutIntro = () => {
           <div className="relative w-full lg:w-115 h-95 shrink-0">
             <div className="absolute top-0 left-0 w-75 h-85 rounded-[28px] overflow-hidden shadow-xl rotate-[-4deg] z-1">
               <Image
-                width={300}
-                height={340}
+                width={500}
+                height={350}
                 src="/aboutImg.png"
                 alt="Driving instructor with student"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover bg-white"
               />
             </div>
 

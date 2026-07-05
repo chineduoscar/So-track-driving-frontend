@@ -15,11 +15,11 @@ const About = () => {
             {/* Main image — back, tilted left */}
             <div className="absolute top-0 left-0 w-75 h-85 rounded-[28px] overflow-hidden shadow-xl rotate-[-4deg] z-1">
               <Image
-                width={300}
-                height={340}
-                src="/aboutImg.png"
+                width={500}
+                height={350}
+                src="/aboutImg.jpg"
                 alt="Driving instructor with student"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover bg-white"
               />
             </div>
 
