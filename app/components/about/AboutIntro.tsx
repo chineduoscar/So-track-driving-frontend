@@ -13,7 +13,7 @@ const AboutIntro = () => {
               <Image
                 width={500}
                 height={350}
-                src="/aboutImg.png"
+                src="/aboutImg.jpg"
                 alt="Driving instructor with student"
                 className="w-full h-full object-cover bg-white"
               />
