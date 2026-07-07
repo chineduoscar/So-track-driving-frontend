@@ -109,7 +109,7 @@ const ContactSection = () => {
               type="submit"
               className="w-full bg-[#333992] hover:opacity-90 text-white text-sm font-semibold rounded-full py-3.5 transition-opacity duration-200 cursor-pointer"
             >
-              Book My Lesson
+              Contact Us
             </button>
           </form>
         </div>
