@@ -1,28 +1,22 @@
 "use client";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import api from "../../lib/axois";
 
 const OPENING_HOURS = [
-  {
-    day: "Monday - Friday",
-    time: "7:00 AM - 6:00 PM",
-  },
-  {
-    day: "Saturday",
-    time: "9:00 AM - 4:00 PM",
-  },
-  {
-    day: "Sunday",
-    time: "Closed",
-  },
+  { day: "Monday - Friday", time: "7:00 AM - 6:00 PM" },
+  { day: "Saturday", time: "9:00 AM - 4:00 PM" },
+  { day: "Sunday", time: "Closed" },
 ];
 
 const ContactSection = () => {
   const [form, setForm] = useState({
     fullName: "",
-    phone: "",
+    phoneNumber: "",
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -32,10 +26,26 @@ const ContactSection = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // wire up to your booking endpoint here
-    console.log(form);
+
+    if (!form.fullName || !form.phoneNumber || !form.email) {
+      toast.error("Please fill in your name, phone and email.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await api.post("/contact", form);
+      toast.success("Message sent!");
+      setForm({ fullName: "", phoneNumber: "", email: "", message: "" });
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -59,6 +69,7 @@ const ContactSection = () => {
                   value={form.fullName}
                   onChange={handleChange}
                   placeholder="Jane Doe"
+                  required
                   className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] placeholder-gray-400"
                 />
               </div>
@@ -68,10 +79,11 @@ const ContactSection = () => {
                 </label>
                 <input
                   type="tel"
-                  name="phone"
-                  value={form.phone}
+                  name="phoneNumber"
+                  value={form.phoneNumber}
                   onChange={handleChange}
                   placeholder="08012345678"
+                  required
                   className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] placeholder-gray-400"
                 />
               </div>
@@ -87,6 +99,7 @@ const ContactSection = () => {
                 value={form.email}
                 onChange={handleChange}
                 placeholder="jane@email.com"
+                required
                 className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] placeholder-gray-400"
               />
             </div>
@@ -101,15 +114,17 @@ const ContactSection = () => {
                 onChange={handleChange}
                 rows={4}
                 placeholder="Tell us when you'd like to start..."
+                required
                 className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] placeholder-gray-400 resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#333992] hover:opacity-90 text-white text-sm font-semibold rounded-full py-3.5 transition-opacity duration-200 cursor-pointer"
+              disabled={isSubmitting}
+              className="w-full bg-[#333992] hover:opacity-90 text-white text-sm font-semibold rounded-full py-3.5 transition-opacity duration-200 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Contact Us
+              {isSubmitting ? "Sending..." : "Contact Us"}
             </button>
           </form>
         </div>
