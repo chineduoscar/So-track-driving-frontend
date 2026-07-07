@@ -1,25 +1,6 @@
 "use client";
 import { useState } from "react";
 
-const zones = [
-  "Mile 3",
-  "Choba",
-  "Rumuokoro",
-  "Ada George",
-  "Woji",
-  "Eliozu",
-  "GRA Phase 2",
-  "Trans Amadi",
-  "Borokiri",
-];
-
-const services = [
-  "Beginner Lessons",
-  "Refresher Course",
-  "Defensive Driving",
-  "Highway Code Test Prep",
-];
-
 const OPENING_HOURS = [
   {
     day: "Monday - Friday",
@@ -40,8 +21,6 @@ const ContactSection = () => {
     fullName: "",
     phone: "",
     email: "",
-    zone: "",
-    service: "",
     message: "",
   });
 
@@ -110,45 +89,6 @@ const ContactSection = () => {
                 placeholder="jane@email.com"
                 className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] placeholder-gray-400"
               />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                  Preferred location
-                </label>
-                <select
-                  name="zone"
-                  value={form.zone}
-                  onChange={handleChange}
-                  className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] text-gray-500 bg-white"
-                >
-                  <option value="">Select a zone</option>
-                  {zones.map((b) => (
-                    <option key={b} value={b}>
-                      {b}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                  Service
-                </label>
-                <select
-                  name="service"
-                  value={form.service}
-                  onChange={handleChange}
-                  className="w-full text-sm border border-gray-200 rounded-lg px-3.5 py-2.5 outline-none focus:ring-2 focus:ring-[#333992]/30 focus:border-[#333992] text-gray-500 bg-white"
-                >
-                  <option value="">Select a service</option>
-                  {services.map((s) => (
-                    <option key={s} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-              </div>
             </div>
 
             <div>
