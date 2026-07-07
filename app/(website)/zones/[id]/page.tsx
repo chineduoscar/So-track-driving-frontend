@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
-import { zones } from "../../data/zones";
-import SingleLocationMain from "../../components/SingleLocation/SingleLocationMain";
+import { zones } from "../../../data/zones";
+import SingleLocationMain from "../../../components/SingleLocation/SingleLocationMain";
 import LocationHero from "@/app/components/SingleLocation/LocationHero";
 
 interface PageProps {
