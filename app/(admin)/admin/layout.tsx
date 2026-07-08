@@ -7,6 +7,7 @@ interface DecodedToken {
   id: string;
   fullName: string;
   email: string;
+  role?: string;
   iat: number;
   exp: number;
 }
@@ -14,15 +15,11 @@ interface DecodedToken {
 async function getUser(): Promise<DecodedToken | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-
   if (!token) return null;
-
   try {
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET as string,
-    ) as DecodedToken;
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string, {
+      algorithms: ["HS256"],
+    }) as DecodedToken;
     return decoded;
   } catch (error) {
     console.error("JWT verify failed:", error);
@@ -37,7 +34,7 @@ export default async function AdminLayout({
 }) {
   const user = await getUser();
 
-  if (!user) {
+  if (!user || user.role !== "admin") {
     redirect("/admin-login");
   }
 

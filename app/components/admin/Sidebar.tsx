@@ -18,7 +18,7 @@ import api from "../../lib/axois";
 
 const navItems = [
   { label: "Home", href: "/admin", icon: FiHome },
-  { label: "Contacts", href: "/admin/contacts", icon: FiMail },
+  { label: "Contact Messages", href: "/admin/contacts", icon: FiMail },
   { label: "Students", href: "/admin/students", icon: FiUsers },
   { label: "Payments", href: "/admin/payments", icon: FiCreditCard },
 ];

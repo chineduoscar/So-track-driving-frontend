@@ -9,6 +9,7 @@ import {
   FiAward,
   FiTruck,
 } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 interface Zone {
   id: number;
@@ -40,9 +41,9 @@ const stats = [
 const formatNaira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
 
 const SingleLocation = ({ zone }: SingleLocationProps) => {
+  const router = useRouter();
   const handlePay = () => {
-    // TODO: hook up real payment provider (Paystack/Flutterwave etc.)
-    console.log("Pay for zone:", zone.id);
+    router.push(`/zones/${zone.id}/checkout`);
   };
 
   return (
@@ -146,13 +147,13 @@ const SingleLocation = ({ zone }: SingleLocationProps) => {
                 onClick={handlePay}
                 className="w-full flex items-center justify-center gap-2 bg-[#00a057] text-white font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#008f4c] transition-colors mb-3 cursor-pointer"
               >
-                <FiCreditCard /> Pay {formatNaira(zone.price)}
+                <FiCreditCard /> Proceed to Payment
               </button>
               <a
                 href={`tel:${zone.phoneNumber}`}
                 className="w-full flex items-center justify-center gap-2 border border-white/20 text-white/80 font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/5 transition-colors"
               >
-                <FiPhone size={14} /> Call to book instead
+                <FiPhone size={14} /> Call for Enquiries
               </a>
             </div>
           </div>
