@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 
 interface DecodedToken {
   id: string;
@@ -10,7 +10,9 @@ interface DecodedToken {
   exp: number;
 }
 
-export function proxy(request: NextRequest) {
+const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const loginUrl = new URL("/admin-login", request.url);
 
@@ -19,9 +21,10 @@ export function proxy(request: NextRequest) {
   }
 
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string, {
+    const { payload } = await jwtVerify(token, secret, {
       algorithms: ["HS256"],
-    }) as DecodedToken;
+    });
+    const decoded = payload as unknown as DecodedToken;
 
     if (decoded.role !== "admin") {
       return NextResponse.redirect(loginUrl);
@@ -35,5 +38,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"]
+  matcher: ["/admin/:path*"],
 };
