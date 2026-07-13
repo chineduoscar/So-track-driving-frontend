@@ -15,6 +15,7 @@ import {
   FiX,
 } from "react-icons/fi";
 import api from "../../lib/axois";
+import Image from "next/image";
 
 const navItems = [
   { label: "Home", href: "/admin", icon: FiHome },
@@ -63,7 +64,14 @@ const Sidebar = ({ user }: SidebarProps) => {
     <>
       {/* Mobile top bar */}
       <div className="sticky top-0 z-30 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 md:hidden">
-        <span className="text-lg font-semibold text-[#333992]">Admin</span>
+        <Image
+          src="/logo.png"
+          alt="SO-TRACK Logo"
+          className="h-15 w-27"
+          loading="eager"
+          width={200}
+          height={100}
+        />
 
         <div className="flex items-center gap-3">
           <button
@@ -93,7 +101,14 @@ const Sidebar = ({ user }: SidebarProps) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-5">
-          <span className="text-xl font-semibold text-[#333992]">Admin</span>
+          <Image
+            src="/logo.png"
+            alt="SO-TRACK Logo"
+            className="h-12 w-25"
+            loading="eager"
+            width={200}
+            height={100}
+          />
           <button
             onClick={() => setIsOpen(false)}
             className="text-gray-500 hover:text-[#333992] active:scale-95 transition md:hidden"
