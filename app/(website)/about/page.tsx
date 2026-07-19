@@ -4,6 +4,7 @@ import MissionVision from "../../components/about/MissionVision";
 import AboutCTA from "../../components/about/AboutCTA";
 import Team from "../../components/about/Team";
 import AboutIntro from "../../components/about/AboutIntro";
+import Leadership from "@/app/components/about/Leadership";
 
 const page = () => {
   return (
@@ -12,6 +13,7 @@ const page = () => {
       <AboutIntro />
       <CoreValues />
       <MissionVision />
+      <Leadership />
       <Team />
       <AboutCTA />
     </>

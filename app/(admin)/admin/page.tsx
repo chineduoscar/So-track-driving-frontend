@@ -9,6 +9,7 @@ import {
   FiXCircle,
   FiTrendingUp,
   FiMapPin,
+  FiTag,
 } from "react-icons/fi";
 import {
   AreaChart,
@@ -25,6 +26,12 @@ interface ZoneStat {
   count: number;
 }
 
+interface PackageStat {
+  _id: "standard" | "executive" | "weekend" | "weekendExecutive" | null;
+  amount: number;
+  count: number;
+}
+
 interface TrendPoint {
   _id: string;
   amount: number;
@@ -35,6 +42,8 @@ interface RecentPayment {
   _id: string;
   fullName: string;
   zone: string;
+  package?: "standard" | "executive" | "weekend" | "weekendExecutive";
+  tier?: "nonExperience" | "partialExperience" | "refresher";
   amount: number;
   createdAt: string;
 }
@@ -47,11 +56,25 @@ interface Stats {
   totalAttempts: number;
   conversionRate: string;
   byZone: ZoneStat[];
+  byPackage: PackageStat[];
   dailyTrend: TrendPoint[];
   recentPayments: RecentPayment[];
 }
 
 const currency = (n: number) => `₦${n?.toLocaleString?.() ?? n}`;
+
+const PACKAGE_LABELS: Record<string, string> = {
+  standard: "Standard",
+  executive: "Executive",
+  weekend: "Weekend",
+  weekendExecutive: "Weekend Executive",
+};
+
+const TIER_LABELS: Record<string, string> = {
+  nonExperience: "New driver",
+  partialExperience: "Some experience",
+  refresher: "Refresher",
+};
 
 const HomePage = () => {
   const [stats, setStats] = useState<Stats | null>(null);
@@ -184,7 +207,7 @@ const HomePage = () => {
           </ResponsiveContainer>
         </div>
 
-        {/* Conversion + Zones */}
+        {/* Conversion + Zones + Packages */}
         <div className="space-y-6">
           <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5">
             <p className="text-xs font-semibold text-gray-500 uppercase mb-1">
@@ -219,6 +242,30 @@ const HomePage = () => {
               ))}
             </div>
           </div>
+
+          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <FiTag size={14} className="text-[#333992]" />
+              <p className="text-xs font-semibold text-gray-500 uppercase">
+                Revenue by Package
+              </p>
+            </div>
+            <div className="space-y-2">
+              {stats.byPackage?.map((pkg) => (
+                <div
+                  key={pkg._id ?? "unknown"}
+                  className="flex items-center justify-between text-sm"
+                >
+                  <span className="text-gray-700">
+                    {pkg._id ? (PACKAGE_LABELS[pkg._id] ?? pkg._id) : "Unknown"}
+                  </span>
+                  <span className="font-semibold text-gray-900">
+                    {currency(pkg.amount)}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -233,6 +280,8 @@ const HomePage = () => {
               <tr>
                 <th className="px-5 py-3">Name</th>
                 <th className="px-5 py-3">Zone</th>
+                <th className="px-5 py-3">Package</th>
+                <th className="px-5 py-3">Experience</th>
                 <th className="px-5 py-3">Amount</th>
                 <th className="px-5 py-3">Date</th>
               </tr>
@@ -245,6 +294,20 @@ const HomePage = () => {
                   </td>
                   <td className="px-5 py-3 text-gray-600 whitespace-nowrap">
                     {p.zone}
+                  </td>
+                  <td className="px-5 py-3 text-gray-600 whitespace-nowrap">
+                    {p.package ? (
+                      (PACKAGE_LABELS[p.package] ?? p.package)
+                    ) : (
+                      <span className="text-gray-400">—</span>
+                    )}
+                  </td>
+                  <td className="px-5 py-3 text-gray-600 whitespace-nowrap">
+                    {p.tier ? (
+                      (TIER_LABELS[p.tier] ?? p.tier)
+                    ) : (
+                      <span className="text-gray-400">—</span>
+                    )}
                   </td>
                   <td className="px-5 py-3 text-gray-600 whitespace-nowrap">
                     {currency(p.amount)}

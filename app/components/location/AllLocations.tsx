@@ -6,14 +6,36 @@ import { getAllZones } from "../../services/zone.servies";
 import { useRouter } from "next/navigation";
 import ZoneSearch from "../../components/location/LocationSearch";
 
+interface PriceTier {
+  nonExperience: number;
+  partialExperience: number;
+  refresher?: number;
+}
+
+interface ZonePricing {
+  standard: PriceTier;
+  executive: PriceTier;
+  weekend: PriceTier;
+  weekendExecutive: PriceTier;
+}
+
 interface Zone {
   id: number;
   name: string;
   lga: string;
-  price: number;
   locations: string[];
   phoneNumber: string;
+  pricing: ZonePricing;
 }
+
+// The "From ₦X" teaser price shown on cards. Anchored to the Standard
+// package's Non-experience tier — the default, no-discount, no-upsell price
+// a first-time customer would actually pay. Showing the true global minimum
+// (e.g. a discounted refresher rate on the Weekend Executive package) would
+// look like bait-and-switch once they see the real price on the detail page.
+const getStartingPrice = (pricing: ZonePricing) => {
+  return pricing.standard.nonExperience;
+};
 
 const AllLocations = () => {
   const [query, setQuery] = useState("");
@@ -100,10 +122,10 @@ const AllLocations = () => {
                   <div className="flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-4 py-3">
                     <span className="flex items-center gap-1.5 text-gray-500 text-xs font-semibold uppercase tracking-wide">
                       <FiTag size={13} className="text-[#00a057]" />
-                      Price
+                      Standard, from
                     </span>
                     <span className="text-[#00a057] text-lg font-extrabold">
-                      ₦{zone.price.toLocaleString()}
+                      ₦{getStartingPrice(zone.pricing).toLocaleString()}
                     </span>
                   </div>
                 </div>

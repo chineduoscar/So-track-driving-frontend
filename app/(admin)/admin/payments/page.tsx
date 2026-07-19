@@ -9,6 +9,8 @@ interface Payment {
   email: string;
   phoneNumber: string;
   zone: string;
+  package: "standard" | "executive" | "weekend" | "weekendExecutive";
+  tier: "nonExperience" | "partialExperience" | "refresher";
   amount: number;
   reference: string;
   paymentMethod?: string;
@@ -24,6 +26,19 @@ const statusStyles: Record<string, string> = {
   success: "bg-green-50 text-green-700 border-green-200",
   pending: "bg-yellow-50 text-yellow-700 border-yellow-200",
   failed: "bg-red-50 text-red-700 border-red-200",
+};
+
+const PACKAGE_LABELS: Record<Payment["package"], string> = {
+  standard: "Standard",
+  executive: "Executive",
+  weekend: "Weekend",
+  weekendExecutive: "Weekend Executive",
+};
+
+const TIER_LABELS: Record<Payment["tier"], string> = {
+  nonExperience: "New driver",
+  partialExperience: "Some experience",
+  refresher: "Refresher",
 };
 
 const PaymentsPage = () => {
@@ -88,6 +103,8 @@ const PaymentsPage = () => {
                   <th className="px-4 py-3">Email</th>
                   <th className="px-4 py-3">Phone</th>
                   <th className="px-4 py-3">Zone</th>
+                  <th className="px-4 py-3">Package</th>
+                  <th className="px-4 py-3">Experience</th>
                   <th className="px-4 py-3">Amount</th>
                   <th className="px-4 py-3">Reference</th>
                   <th className="px-4 py-3">Status</th>
@@ -118,7 +135,21 @@ const PaymentsPage = () => {
                     <td className="px-4 py-3 text-gray-600 text-xs">
                       {payment.zone}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs">
+                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
+                      {payment.package ? (
+                        (PACKAGE_LABELS[payment.package] ?? payment.package)
+                      ) : (
+                        <span className="text-gray-400">—</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
+                      {payment.tier ? (
+                        (TIER_LABELS[payment.tier] ?? payment.tier)
+                      ) : (
+                        <span className="text-gray-400">—</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
                       {payment.currency ?? "NGN"}{" "}
                       {payment.amount?.toLocaleString?.() ?? payment.amount}
                     </td>
@@ -135,7 +166,7 @@ const PaymentsPage = () => {
                         {payment.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-xs">
+                    <td className="px-4 py-3 text-gray-500 text-xs whitespace-nowrap">
                       {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
                   </tr>

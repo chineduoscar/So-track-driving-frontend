@@ -10,11 +10,26 @@ import { downloadReceipt } from "../../../../../utils/downloadReceipt";
 interface Payment {
   fullName: string;
   zone: string;
+  package: "standard" | "executive" | "weekend" | "weekendExecutive";
+  tier: "nonExperience" | "partialExperience" | "refresher";
   amount: number;
   reference: string;
 }
 
 const formatNaira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
+
+const PACKAGE_LABELS: Record<Payment["package"], string> = {
+  standard: "Standard",
+  executive: "Executive",
+  weekend: "Weekend",
+  weekendExecutive: "Weekend Executive",
+};
+
+const TIER_LABELS: Record<Payment["tier"], string> = {
+  nonExperience: "New driver",
+  partialExperience: "Some experience",
+  refresher: "Refresher",
+};
 
 const CheckoutSuccessPage = () => {
   const searchParams = useSearchParams();
@@ -108,6 +123,18 @@ const CheckoutSuccessPage = () => {
                     <span className="text-gray-400">Zone</span>
                     <span className="font-semibold text-gray-800">
                       {payment.zone}
+                    </span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span className="text-gray-400">Package</span>
+                    <span className="font-semibold text-gray-800">
+                      {PACKAGE_LABELS[payment.package] ?? payment.package}
+                    </span>
+                  </p>
+                  <p className="flex justify-between">
+                    <span className="text-gray-400">Experience level</span>
+                    <span className="font-semibold text-gray-800">
+                      {TIER_LABELS[payment.tier] ?? payment.tier}
                     </span>
                   </p>
                   <p className="flex justify-between">

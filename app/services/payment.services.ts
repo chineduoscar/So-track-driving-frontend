@@ -1,10 +1,12 @@
- import api from "../lib/axois";
+import api from "../lib/axois";
 
 interface InitializePaymentPayload {
   fullName: string;
   email: string;
   phoneNumber: string;
   zoneId: number;
+  package: "standard" | "executive" | "weekend" | "weekendExecutive";
+  tier: "nonExperience" | "partialExperience" | "refresher";
 }
 
 export const initializePayment = async (payload: InitializePaymentPayload) => {

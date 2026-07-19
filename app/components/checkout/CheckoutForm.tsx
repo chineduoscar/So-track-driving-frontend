@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { initializePayment } from "../../services/payment.services";
 import {
   FiUser,
@@ -11,11 +11,24 @@ import {
   FiArrowLeft,
 } from "react-icons/fi";
 
+interface PriceTier {
+  nonExperience: number;
+  partialExperience: number;
+  refresher?: number;
+}
+
+interface ZonePricing {
+  standard: PriceTier;
+  executive: PriceTier;
+  weekend: PriceTier;
+  weekendExecutive: PriceTier;
+}
+
 interface Zone {
   id: number;
   name: string;
   lga: string;
-  price: number;
+  pricing: ZonePricing;
   locations: string[];
   phoneNumber: string;
 }
@@ -26,8 +39,45 @@ interface CheckoutFormProps {
 
 const formatNaira = (amount: number) => `₦${amount.toLocaleString("en-NG")}`;
 
+const PACKAGE_LABELS: Record<keyof ZonePricing, string> = {
+  standard: "Standard",
+  executive: "Executive",
+  weekend: "Weekend",
+  weekendExecutive: "Weekend Executive",
+};
+
+const TIER_LABELS: Record<keyof PriceTier, string> = {
+  nonExperience: "New driver",
+  partialExperience: "Some experience",
+  refresher: "Refresher",
+};
+
+const isValidPackage = (value: string | null): value is keyof ZonePricing =>
+  !!value && value in PACKAGE_LABELS;
+
+const isValidTier = (value: string | null): value is keyof PriceTier =>
+  !!value && value in TIER_LABELS;
+
 const CheckoutForm = ({ zone }: CheckoutFormProps) => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // These came from the link SingleLocation built (?package=...&tier=...).
+  // Fall back to Standard / New driver if the URL is missing or malformed
+  // (e.g. someone typed the checkout URL by hand) rather than crashing.
+  const rawPackage = searchParams.get("package");
+  const rawTier = searchParams.get("tier");
+  const selectedPackage: keyof ZonePricing = isValidPackage(rawPackage)
+    ? rawPackage
+    : "standard";
+  const tierPrices = zone.pricing[selectedPackage];
+  const selectedTier: keyof PriceTier =
+    isValidTier(rawTier) && tierPrices[rawTier] !== undefined
+      ? rawTier
+      : "nonExperience";
+
+  const price = tierPrices[selectedTier] as number;
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -52,6 +102,8 @@ const CheckoutForm = ({ zone }: CheckoutFormProps) => {
         email,
         phoneNumber,
         zoneId: zone.id,
+        package: selectedPackage,
+        tier: selectedTier,
       });
 
       if (data.success && data.authorization_url) {
@@ -86,13 +138,19 @@ const CheckoutForm = ({ zone }: CheckoutFormProps) => {
         <p className="text-gray-500 text-sm">{zone.lga}</p>
       </div>
 
-      <div className="flex items-center justify-between bg-green-50 border border-green-100 rounded-xl px-5 py-4 mb-8">
-        <span className="text-gray-500 text-xs font-semibold uppercase tracking-wide">
-          Amount due
-        </span>
-        <span className="text-[#00a057] text-xl font-extrabold">
-          {formatNaira(zone.price)}
-        </span>
+      <div className="bg-green-50 border border-green-100 rounded-xl px-5 py-4 mb-8">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-gray-500 text-xs font-semibold uppercase tracking-wide">
+            Amount due
+          </span>
+          <span className="text-[#00a057] text-xl font-extrabold">
+            {formatNaira(price)}
+          </span>
+        </div>
+        <div className="flex items-center justify-between text-xs text-gray-500 border-t border-green-100/80 pt-2">
+          <span>{PACKAGE_LABELS[selectedPackage]}</span>
+          <span>{TIER_LABELS[selectedTier]}</span>
+        </div>
       </div>
 
       {error && (
@@ -168,7 +226,7 @@ const CheckoutForm = ({ zone }: CheckoutFormProps) => {
           className="w-full flex items-center justify-center gap-2 bg-[#00a057] text-white font-semibold text-sm px-6 py-3.5 rounded-full hover:bg-[#008f4c] transition-colors mt-2 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <FiCreditCard />
-          {submitting ? "Processing..." : `Pay ${formatNaira(zone.price)}`}
+          {submitting ? "Processing..." : `Pay ${formatNaira(price)}`}
         </button>
       </form>
     </div>

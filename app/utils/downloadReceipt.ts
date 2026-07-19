@@ -3,9 +3,24 @@ import jsPDF from "jspdf";
 interface Payment {
   fullName: string;
   zone: string;
+  package: "standard" | "executive" | "weekend" | "weekendExecutive";
+  tier: "nonExperience" | "partialExperience" | "refresher";
   amount: number;
   reference: string;
 }
+
+const PACKAGE_LABELS: Record<Payment["package"], string> = {
+  standard: "Standard",
+  executive: "Executive",
+  weekend: "Weekend",
+  weekendExecutive: "Weekend Executive",
+};
+
+const TIER_LABELS: Record<Payment["tier"], string> = {
+  nonExperience: "New driver",
+  partialExperience: "Some experience",
+  refresher: "Refresher",
+};
 
 const formatNaira = (amount: number) => `NGN ${amount.toLocaleString("en-NG")}`;
 
@@ -135,6 +150,8 @@ doc.text("PAYMENT SUCCESSFUL", marginX + 26, y + 1);
   const rows: [string, string][] = [
     ["Full Name", payment.fullName],
     ["Zone", payment.zone],
+    ["Package", PACKAGE_LABELS[payment.package] ?? payment.package],
+    ["Experience Level", TIER_LABELS[payment.tier] ?? payment.tier],
     ["Reference", payment.reference],
   ];
 
