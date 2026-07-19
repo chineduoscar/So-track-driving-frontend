@@ -160,7 +160,7 @@ const PaymentsPage = () => {
                       <span
                         className={`px-2 py-1 rounded-full border text-xs font-semibold capitalize ${
                           statusStyles[payment.status] ??
-                          "bg-gray-50 text-gray-600 border-gray-200"
+                          "bg-gray-50 text-gray-600 border-gray-200 text-xs"
                         }`}
                       >
                         {payment.status}
