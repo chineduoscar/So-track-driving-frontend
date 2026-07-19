@@ -117,7 +117,7 @@ const PaymentsPage = () => {
                     <td className="px-4 py-3 font-medium text-gray-900 text-xs">
                       {payment.fullName}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs">
+                    <td className="px-4 py-3 text-gray-600 text-[10px]">
                       {payment.email}
                     </td>
                     <td className="px-4 py-3">
@@ -132,7 +132,7 @@ const PaymentsPage = () => {
                         <span className="text-gray-400">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs">
+                    <td className="px-4 py-3 text-gray-600 text-[10px]">
                       {payment.zone}
                     </td>
                     <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
