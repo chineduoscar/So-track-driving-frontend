@@ -114,7 +114,7 @@ const PaymentsPage = () => {
               <tbody className="divide-y divide-gray-100">
                 {payments.map((payment) => (
                   <tr key={payment._id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium text-gray-900 text-xs">
+                    <td className="px-4 py-3 font-medium text-gray-900 text-[10px]">
                       {payment.fullName}
                     </td>
                     <td className="px-4 py-3 text-gray-600 text-[10px]">
@@ -124,7 +124,7 @@ const PaymentsPage = () => {
                       {payment.phoneNumber ? (
                         <a
                           href={`tel:${payment.phoneNumber}`}
-                          className="text-[#333992] font-medium text-xs hover:underline"
+                          className="text-[#333992] font-medium text-[10px] hover:underline"
                         >
                           {payment.phoneNumber}
                         </a>
@@ -135,38 +135,38 @@ const PaymentsPage = () => {
                     <td className="px-4 py-3 text-gray-600 text-[10px]">
                       {payment.zone}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
+                    <td className="px-4 py-3 text-gray-600 text-[10px] whitespace-nowrap">
                       {payment.package ? (
                         (PACKAGE_LABELS[payment.package] ?? payment.package)
                       ) : (
                         <span className="text-gray-400">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
+                    <td className="px-4 py-3 text-gray-600 text-[10px] whitespace-nowrap">
                       {payment.tier ? (
                         (TIER_LABELS[payment.tier] ?? payment.tier)
                       ) : (
                         <span className="text-gray-400">—</span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-gray-600 text-xs whitespace-nowrap">
+                    <td className="px-4 py-3 text-gray-600 text-[10px] whitespace-nowrap">
                       {payment.currency ?? "NGN"}{" "}
                       {payment.amount?.toLocaleString?.() ?? payment.amount}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 font-mono text-[9px]">
+                    <td className="px-4 py-3 text-gray-500 font-mono text-[10px]">
                       {payment.reference}
                     </td>
                     <td className="px-4 py-3">
                       <span
-                        className={`px-2 py-1 rounded-full border text-xs font-semibold capitalize ${
+                        className={`px-2 py-1 rounded-full border text-[10px] font-semibold capitalize ${
                           statusStyles[payment.status] ??
-                          "bg-gray-50 text-gray-600 border-gray-200 text-xs"
+                          "bg-gray-50 text-gray-600 border-gray-200"
                         }`}
                       >
                         {payment.status}
                       </span>
                     </td>
-                    <td className="px-4 py-3 text-gray-500 text-xs whitespace-nowrap">
+                    <td className="px-4 py-3 text-gray-500 text-[10px] whitespace-nowrap">
                       {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
                   </tr>
