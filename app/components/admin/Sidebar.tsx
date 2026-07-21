@@ -9,6 +9,7 @@ import {
   FiMail,
   FiUsers,
   FiCreditCard,
+  FiUserCheck,
   FiLogOut,
   FiArrowLeft,
   FiMenu,
@@ -21,6 +22,7 @@ const navItems = [
   { label: "Home", href: "/admin", icon: FiHome },
   { label: "Contact Messages", href: "/admin/contacts", icon: FiMail },
   { label: "Students", href: "/admin/students", icon: FiUsers },
+  { label: "Assign Drivers", href: "/admin/assign-drivers", icon: FiUserCheck },
   { label: "Payments", href: "/admin/payments", icon: FiCreditCard },
 ];
 
