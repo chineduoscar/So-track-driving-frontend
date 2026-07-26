@@ -19,17 +19,18 @@ import api from "../../lib/axois";
 import Image from "next/image";
 
 const navItems = [
-  { label: "Home", href: "/admin", icon: FiHome },
-  { label: "Contact Messages", href: "/admin/contacts", icon: FiMail },
-  { label: "Students", href: "/admin/students", icon: FiUsers },
-  { label: "Assign Drivers", href: "/admin/assign-drivers", icon: FiUserCheck },
-  { label: "Payments", href: "/admin/payments", icon: FiCreditCard },
+  { label: "Home", href: "/staff", icon: FiHome },
+  { label: "Contact Messages", href: "/staff/contacts", icon: FiMail },
+  { label: "Students", href: "/staff/students", icon: FiUsers },
+  { label: "Assign Drivers", href: "/staff/assign-drivers", icon: FiUserCheck },
+  { label: "Payments", href: "/staff/payments", icon: FiCreditCard },
 ];
 
 interface SidebarProps {
   user?: {
     fullName: string;
     email: string;
+    role?: string;
   };
 }
 
@@ -52,7 +53,7 @@ const Sidebar = ({ user }: SidebarProps) => {
     try {
       await api.post("/auth/logout");
       toast.success("Logged out successfully.");
-      router.push("/admin-login");
+      router.push("/staff/login");
     } catch {
       toast.error("Failed to logout. Please try again.");
     } finally {
@@ -61,6 +62,14 @@ const Sidebar = ({ user }: SidebarProps) => {
   };
 
   const initial = user?.fullName?.charAt(0).toUpperCase() || "A";
+
+  // roles allowed into /staff.
+  const visibleNavItems = navItems.filter((item) => {
+    if (item.href === "/staff/assign-drivers") {
+      return user?.role === "superadmin";
+    }
+    return true;
+  });
 
   return (
     <>
@@ -123,7 +132,7 @@ const Sidebar = ({ user }: SidebarProps) => {
         {/* Scrollable nav */}
         <nav className="flex-1 overflow-y-auto px-3">
           <ul className="space-y-1">
-            {navItems.map(({ label, href, icon: Icon }) => {
+            {visibleNavItems.map(({ label, href, icon: Icon }) => {
               const isActive = pathname === href;
               return (
                 <li key={href}>

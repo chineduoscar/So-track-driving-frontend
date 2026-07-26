@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import api from "../../../lib/axois";
 import ViewStudentModal from "../../../components/modal/ViewStudentModal";
 import DeleteConfirmModal from "../../../components/modal/DeleteConfirmModal";
+import { useAdminUser } from "../../../context/AdminUserContext";
 
 interface Student {
   _id: string;
@@ -35,6 +36,9 @@ const TIER_LABELS: Record<NonNullable<Student["tier"]>, string> = {
 const UNASSIGNED = "Unassigned";
 
 const StudentsPage = () => {
+  const { role } = useAdminUser();
+  const canDelete = role === "superadmin";
+
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Student | null>(null);
@@ -191,15 +195,19 @@ const StudentsPage = () => {
                               >
                                 View
                               </button>
-                              <button
-                                onClick={() => setPendingDeleteId(student._id)}
-                                disabled={deletingId === student._id}
-                                className="text-red-600 font-semibold hover:underline cursor-pointer disabled:opacity-50"
-                              >
-                                {deletingId === student._id
-                                  ? "Deleting..."
-                                  : "Delete"}
-                              </button>
+                              {canDelete && (
+                                <button
+                                  onClick={() =>
+                                    setPendingDeleteId(student._id)
+                                  }
+                                  disabled={deletingId === student._id}
+                                  className="text-red-600 font-semibold hover:underline cursor-pointer disabled:opacity-50"
+                                >
+                                  {deletingId === student._id
+                                    ? "Deleting..."
+                                    : "Delete"}
+                                </button>
+                              )}
                             </td>
                           </tr>
                         ))}

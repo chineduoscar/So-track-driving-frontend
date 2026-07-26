@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import api from "../../../lib/axois";
 import ViewContactModal from "../../../components/modal/ViewContactModal";
 import DeleteConfirmModal from "../../../components/modal/DeleteConfirmModal";
+import { useAdminUser } from "../../../context/AdminUserContext";
 
 interface Contact {
   _id: string;
@@ -15,6 +16,9 @@ interface Contact {
 }
 
 const ContactsPage = () => {
+  const { role } = useAdminUser();
+  const canDelete = role === "superadmin";
+
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<Contact | null>(null);
@@ -103,13 +107,17 @@ const ContactsPage = () => {
                       >
                         View
                       </button>
-                      <button
-                        onClick={() => setPendingDeleteId(contact._id)}
-                        disabled={deletingId === contact._id}
-                        className="text-red-600 font-semibold hover:underline cursor-pointer disabled:opacity-50"
-                      >
-                        {deletingId === contact._id ? "Deleting..." : "Delete"}
-                      </button>
+                      {canDelete && (
+                        <button
+                          onClick={() => setPendingDeleteId(contact._id)}
+                          disabled={deletingId === contact._id}
+                          className="text-red-600 font-semibold hover:underline cursor-pointer disabled:opacity-50"
+                        >
+                          {deletingId === contact._id
+                            ? "Deleting..."
+                            : "Delete"}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}

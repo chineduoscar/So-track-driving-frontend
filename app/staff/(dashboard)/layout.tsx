@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import jwt from "jsonwebtoken";
 import Sidebar from "../../components/admin/Sidebar";
+import { AdminUserProvider } from "../../context/AdminUserContext";
 
 interface DecodedToken {
   id: string;
@@ -11,6 +12,8 @@ interface DecodedToken {
   iat: number;
   exp: number;
 }
+
+const ALLOWED_ROLES = ["superadmin", "admin"];
 
 async function getUser(): Promise<DecodedToken | null> {
   const cookieStore = await cookies();
@@ -33,16 +36,26 @@ export default async function AdminLayout({
   children: React.ReactNode;
 }) {
   const user = await getUser();
-  console.log(user?.role);
 
-  if (!user || user.role !== "admin") {
-    redirect("/admin-login");
+  if (!user || !ALLOWED_ROLES.includes(user.role ?? "")) {
+    redirect("/staff/login");
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#f8f9fc] md:h-screen md:flex-row md:overflow-hidden">
-      <Sidebar user={user} />
-      <main className="flex-1 overflow-y-auto p-6 md:p-8">{children}</main>
-    </div>
+    <AdminUserProvider
+      user={{
+        id: user.id,
+        fullName: user.fullName,
+        email: user.email,
+        role: user.role!,
+      }}
+    >
+      <div className="flex min-h-screen flex-col bg-[#f8f9fc] md:h-screen md:flex-row md:overflow-hidden">
+        <Sidebar
+          user={{ fullName: user.fullName, email: user.email, role: user.role }}
+        />
+        <main className="flex-1 overflow-y-auto p-6 md:p-8">{children}</main>
+      </div>
+    </AdminUserProvider>
   );
 }
