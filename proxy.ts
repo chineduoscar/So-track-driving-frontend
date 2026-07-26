@@ -11,14 +11,21 @@ interface DecodedToken {
 }
 
 const ALLOWED_STAFF_ROLES = ["superadmin", "admin"];
+const PUBLIC_PATHS = ["/staff/login", "/staff/register"];
 
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  if (PUBLIC_PATHS.includes(pathname)) {
+    return NextResponse.next();
+  }
+
   const token = request.cookies.get("token")?.value;
   const loginUrl = new URL("/staff/login", request.url);
   const staffHomeUrl = new URL("/staff", request.url);
-  const pendingUrl = new URL("/pending-approval", request.url);
+  const pendingUrl = new URL("/staff/pending-approval", request.url);
 
   if (!token) {
     return NextResponse.redirect(loginUrl);
@@ -39,7 +46,7 @@ export async function proxy(request: NextRequest) {
     }
 
     if (
-      request.nextUrl.pathname.startsWith("/staff/assign-drivers") &&
+      pathname.startsWith("/staff/assign-drivers") &&
       decoded.role !== "superadmin"
     ) {
       return NextResponse.redirect(staffHomeUrl);
