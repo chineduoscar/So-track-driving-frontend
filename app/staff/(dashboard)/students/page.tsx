@@ -5,20 +5,7 @@ import api from "../../../lib/axois";
 import ViewStudentModal from "../../../components/modal/ViewStudentModal";
 import DeleteConfirmModal from "../../../components/modal/DeleteConfirmModal";
 import { useAdminUser } from "../../../context/AdminUserContext";
-
-interface Student {
-  _id: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  zone?: string;
-  package?: "standard" | "executive" | "weekend" | "weekendExecutive";
-  tier?: "nonExperience" | "partialExperience" | "refresher";
-  amount: number;
-  courseName?: string;
-  status: string;
-  createdAt: string;
-}
+import { Student } from "@/app/types/student";
 
 const PACKAGE_LABELS: Record<NonNullable<Student["package"]>, string> = {
   standard: "Standard",
@@ -145,7 +132,6 @@ const StudentsPage = () => {
                       <thead className="text-left text-xs font-semibold text-gray-600 uppercase border-b border-gray-100">
                         <tr>
                           <th className="px-4 py-3">Name</th>
-                          <th className="px-4 py-3">Email</th>
                           <th className="px-4 py-3">Phone</th>
                           <th className="px-4 py-3">Package</th>
                           <th className="px-4 py-3">Experience</th>
@@ -159,9 +145,6 @@ const StudentsPage = () => {
                           <tr key={student._id} className="hover:bg-gray-50">
                             <td className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">
                               {student.fullName}
-                            </td>
-                            <td className="px-4 py-3 text-gray-600 whitespace-nowrap">
-                              {student.email}
                             </td>
                             <td className="px-4 py-3 text-gray-600 whitespace-nowrap">
                               {student.phoneNumber}

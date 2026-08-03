@@ -2,22 +2,13 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../../lib/axois";
+import ViewPaymentModal from "../../../components/modal/ViewPaymentModal";
+import { Payment } from "@/app/types/payment";
 
-interface Payment {
-  _id: string;
-  fullName: string;
-  email: string;
-  phoneNumber: string;
-  zone: string;
-  package: "standard" | "executive" | "weekend" | "weekendExecutive";
-  tier: "nonExperience" | "partialExperience" | "refresher";
-  amount: number;
-  reference: string;
-  paymentMethod?: string;
-  currency?: string;
-  status: string;
-  paidAt?: string;
-  createdAt: string;
+export interface RefereeInfo {
+  name?: string | null;
+  address?: string | null;
+  phoneNumber?: string | null;
 }
 
 const STATUS_OPTIONS = ["all", "success", "pending", "failed"];
@@ -45,6 +36,7 @@ const PaymentsPage = () => {
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("all");
+  const [selected, setSelected] = useState<Payment | null>(null);
 
   useEffect(() => {
     const loadPayments = async () => {
@@ -100,25 +92,21 @@ const PaymentsPage = () => {
               <thead className="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase">
                 <tr>
                   <th className="px-4 py-3">Name</th>
-                  <th className="px-4 py-3">Email</th>
                   <th className="px-4 py-3">Phone</th>
                   <th className="px-4 py-3">Zone</th>
                   <th className="px-4 py-3">Package</th>
                   <th className="px-4 py-3">Experience</th>
                   <th className="px-4 py-3">Amount</th>
-                  <th className="px-4 py-3">Reference</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Date</th>
+                  <th className="px-4 py-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
                 {payments.map((payment) => (
                   <tr key={payment._id} className="hover:bg-gray-50">
-                    <td className="px-4 py-3 font-medium text-gray-900 text-[10px]">
+                    <td className="px-4 py-3 font-medium text-gray-900 text-[10px] whitespace-nowrap">
                       {payment.fullName}
-                    </td>
-                    <td className="px-4 py-3 text-gray-600 text-[10px]">
-                      {payment.email}
                     </td>
                     <td className="px-4 py-3">
                       {payment.phoneNumber ? (
@@ -153,9 +141,6 @@ const PaymentsPage = () => {
                       {payment.currency ?? "NGN"}{" "}
                       {payment.amount?.toLocaleString?.() ?? payment.amount}
                     </td>
-                    <td className="px-4 py-3 text-gray-500 font-mono text-[10px]">
-                      {payment.reference}
-                    </td>
                     <td className="px-4 py-3">
                       <span
                         className={`px-2 py-1 rounded-full border text-[10px] font-semibold capitalize ${
@@ -169,12 +154,27 @@ const PaymentsPage = () => {
                     <td className="px-4 py-3 text-gray-500 text-[10px] whitespace-nowrap">
                       {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
+                    <td className="px-4 py-3 text-right whitespace-nowrap">
+                      <button
+                        onClick={() => setSelected(payment)}
+                        className="text-[#333992] font-semibold text-[10px] hover:underline cursor-pointer"
+                      >
+                        View
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         </div>
+      )}
+
+      {selected && (
+        <ViewPaymentModal
+          payment={selected}
+          onClose={() => setSelected(null)}
+        />
       )}
     </div>
   );
