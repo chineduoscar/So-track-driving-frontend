@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import api from "../../../lib/axois";
 import ViewPaymentModal from "../../../components/modal/ViewPaymentModal";
+import DeleteConfirmModal from "../../../components/modal/DeleteConfirmModal";
+import { useAdminUser } from "../../../context/AdminUserContext";
 import { Payment } from "@/app/types/payment";
 
 export interface RefereeInfo {
@@ -33,10 +35,15 @@ const TIER_LABELS: Record<Payment["tier"], string> = {
 };
 
 const PaymentsPage = () => {
+  const { role } = useAdminUser();
+  const canDelete = role === "superadmin";
+
   const [payments, setPayments] = useState<Payment[]>([]);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("all");
   const [selected, setSelected] = useState<Payment | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState<string | null>(null);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
     const loadPayments = async () => {
@@ -56,6 +63,25 @@ const PaymentsPage = () => {
 
     loadPayments();
   }, [status]);
+
+  const handleDelete = async () => {
+    if (!pendingDeleteId) return;
+    const id = pendingDeleteId;
+
+    setDeletingId(id);
+    try {
+      await api.delete(`/payment/${id}`);
+      toast.success("Payment deleted.");
+      setPayments((prev) => prev.filter((p) => p._id !== id));
+      if (selected?._id === id) setSelected(null);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to delete payment.");
+    } finally {
+      setDeletingId(null);
+      setPendingDeleteId(null);
+    }
+  };
 
   return (
     <div className="p-2 md:p-6">
@@ -154,13 +180,24 @@ const PaymentsPage = () => {
                     <td className="px-4 py-3 text-gray-500 text-[10px] whitespace-nowrap">
                       {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
-                    <td className="px-4 py-3 text-right whitespace-nowrap">
+                    <td className="px-4 py-3 text-right space-x-3 whitespace-nowrap">
                       <button
                         onClick={() => setSelected(payment)}
                         className="text-[#333992] font-semibold text-[10px] hover:underline cursor-pointer"
                       >
                         View
                       </button>
+                      {canDelete && (
+                        <button
+                          onClick={() => setPendingDeleteId(payment._id)}
+                          disabled={deletingId === payment._id}
+                          className="text-red-600 font-semibold text-[10px] hover:underline cursor-pointer disabled:opacity-50"
+                        >
+                          {deletingId === payment._id
+                            ? "Deleting..."
+                            : "Delete"}
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -174,6 +211,14 @@ const PaymentsPage = () => {
         <ViewPaymentModal
           payment={selected}
           onClose={() => setSelected(null)}
+        />
+      )}
+
+      {pendingDeleteId && (
+        <DeleteConfirmModal
+          isDeleting={deletingId === pendingDeleteId}
+          onConfirm={handleDelete}
+          onCancel={() => setPendingDeleteId(null)}
         />
       )}
     </div>

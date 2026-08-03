@@ -5,6 +5,7 @@ import api from "../../../lib/axois";
 import ViewStudentModal from "../../../components/modal/ViewStudentModal";
 import DeleteConfirmModal from "../../../components/modal/DeleteConfirmModal";
 import { useAdminUser } from "../../../context/AdminUserContext";
+import { exportStudentsToExcel } from "../../../utils/exportStudentsToExcel";
 import { Student } from "@/app/types/student";
 
 const PACKAGE_LABELS: Record<NonNullable<Student["package"]>, string> = {
@@ -96,9 +97,20 @@ const StudentsPage = () => {
 
   return (
     <div className="p-2 md:p-6">
-      <h1 className="text-xl font-extrabold text-gray-900 mb-6">
-        Students ({students.length})
-      </h1>
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-xl font-extrabold text-gray-900">
+          Students ({students.length})
+        </h1>
+
+        {students.length > 0 && (
+          <button
+            onClick={() => exportStudentsToExcel(students)}
+            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#333992] text-white hover:bg-[#282d73] transition cursor-pointer"
+          >
+            Download as Excel
+          </button>
+        )}
+      </div>
 
       {students.length === 0 ? (
         <p className="text-sm text-gray-500">No students yet.</p>
