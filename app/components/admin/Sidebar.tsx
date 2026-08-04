@@ -10,6 +10,7 @@ import {
   FiUsers,
   FiCreditCard,
   FiUserCheck,
+  FiShield,
   FiLogOut,
   FiArrowLeft,
   FiMenu,
@@ -23,6 +24,7 @@ const navItems = [
   { label: "Contact Messages", href: "/staff/contacts", icon: FiMail },
   { label: "Students", href: "/staff/students", icon: FiUsers },
   { label: "Assign Drivers", href: "/staff/assign-drivers", icon: FiUserCheck },
+  { label: "User Management", href: "/staff/user-management", icon: FiShield },
   { label: "Payments", href: "/staff/payments", icon: FiCreditCard },
 ];
 
@@ -64,8 +66,13 @@ const Sidebar = ({ user }: SidebarProps) => {
   const initial = user?.fullName?.charAt(0).toUpperCase() || "A";
 
   // roles allowed into /staff.
+  const superadminOnlyRoutes = [
+    "/staff/assign-drivers",
+    "/staff/user-management",
+  ];
+
   const visibleNavItems = navItems.filter((item) => {
-    if (item.href === "/staff/assign-drivers") {
+    if (superadminOnlyRoutes.includes(item.href)) {
       return user?.role === "superadmin";
     }
     return true;

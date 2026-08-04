@@ -85,8 +85,6 @@ const TIER_LABELS: Record<string, string> = {
   refresher: "Refresher",
 };
 
-// Builds a two-point, zero-value fallback series so the chart always has
-// axis lines to render (X and Y), even when there's no real trend data.
 const buildPlaceholderTrend = (period: Period): TrendPoint[] => {
   const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -115,8 +113,6 @@ const buildPlaceholderTrend = (period: Period): TrendPoint[] => {
     ];
   }
 
-  // "all" / general — span from 7 days ago to today just to give the axis
-  // two ticks; this is display-only and unrelated to how data is grouped.
   const end = new Date();
   const start = new Date();
   start.setDate(end.getDate() - 6);
@@ -152,8 +148,6 @@ const HomePage = () => {
     loadStats();
   }, [period]);
 
-  // Label now reflects the selected period instead of always defaulting
-  // to "Last 7 Days" for the general/all-time view.
   const trendLabel =
     period === "today"
       ? "Revenue — Today (Hourly)"
@@ -293,7 +287,7 @@ const HomePage = () => {
                       tickLine={{ stroke: "#e5e7eb" }}
                       tickFormatter={(v) =>
                         isHourlyTrend
-                          ? v.split(" ")[1] // just show "HH:00"
+                          ? v.split(" ")[1]
                           : new Date(v).toLocaleDateString(undefined, {
                               month: "short",
                               day: "numeric",

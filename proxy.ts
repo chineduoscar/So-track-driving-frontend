@@ -13,6 +13,8 @@ interface DecodedToken {
 const ALLOWED_STAFF_ROLES = ["superadmin", "admin"];
 const PUBLIC_PATHS = ["/staff/login", "/staff/register"];
 
+const SUPERADMIN_ONLY_PATHS = ["/staff/assign-drivers", "/staff/user-management"];
+
 const secret = new TextEncoder().encode(process.env.JWT_SECRET);
 
 export async function proxy(request: NextRequest) {
@@ -46,7 +48,7 @@ export async function proxy(request: NextRequest) {
     }
 
     if (
-      pathname.startsWith("/staff/assign-drivers") &&
+      SUPERADMIN_ONLY_PATHS.some((path) => pathname.startsWith(path)) &&
       decoded.role !== "superadmin"
     ) {
       return NextResponse.redirect(staffHomeUrl);
