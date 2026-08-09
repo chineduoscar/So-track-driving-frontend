@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FiBookOpen, FiUsers } from "react-icons/fi";
 
 const ceo = {
-  image: "/ceo.png",
+  image: "/ceo.jpg",
   name: "Mrs. Ibingo Sobere Barango",
   role: "Chief Executive Officer, So-Track Driving School Ltd",
   bio: "Since founding the company in 2015, Mrs. Barango has provided visionary leadership driving its growth, reputation, and commitment to excellence in driver education. With over a decade of leadership and management experience, she oversees strategic direction, operational planning, customer service, instructor coordination, client relations, and regulatory compliance. She began her career during NYSC as a teacher at Community Secondary School, Alode, Eleme, and also leads Goodngo Food and Investment Limited.",
