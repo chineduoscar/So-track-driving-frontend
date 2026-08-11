@@ -13,7 +13,7 @@ export default function PendingApprovalPage() {
           Please check back later.
         </p>
 
-        <div className="mt-6 flex flex-col items-center gap-3">
+        <div className="mt-6 flex justify-center items-center gap-3">
           <Link
             href="/staff/login"
             className="text-sm font-medium text-[#333992] hover:opacity-80"
