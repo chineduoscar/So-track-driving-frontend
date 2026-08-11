@@ -27,7 +27,7 @@ export async function proxy(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const loginUrl = new URL("/staff/login", request.url);
   const staffHomeUrl = new URL("/staff", request.url);
-  const pendingUrl = new URL("/staff/pending-approval", request.url);
+  const pendingUrl = new URL("/pending-approval", request.url);
 
   if (!token) {
     return NextResponse.redirect(loginUrl);
