@@ -129,7 +129,7 @@ const ContactSection = () => {
           </form>
         </div>
 
-        {/* Sidebar: live map + hours */}
+        {/* Sidebar: live map + address + hours */}
         <div className="flex flex-col gap-6">
           <div className="rounded-2xl overflow-hidden shadow-sm border border-gray-100 h-48">
             <iframe
@@ -153,6 +153,17 @@ const ContactSection = () => {
             </a>
           </div>
 
+          {/* Address Card */}
+          <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6">
+            <h3 className="font-bold text-gray-900 mb-2">Visit us</h3>
+            <p className="text-sm text-gray-600 leading-relaxed">
+              Block C / Store 17/20, Obidave Plaza, <br />
+              By JDP Roundabout, 202 Peter Odili Rd, <br />
+              Port Harcourt 500003, Rivers
+            </p>
+          </div>
+
+          {/* Operating Hours Card */}
           <div className="bg-white border border-gray-100 rounded-2xl shadow-sm p-6">
             <h3 className="font-bold text-gray-900 mb-4">Operating hours</h3>
             <div className="space-y-2.5 text-sm">

@@ -5,7 +5,7 @@ const contactItems = [
   {
     icon: FiPhone,
     label: "Call Us",
-    value: "08037466270",
+    value: "08037466270 / 07039597679",
     href: "tel:08037466270",
   },
   {
@@ -41,7 +41,7 @@ const ContactInfo = () => {
               <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 mb-1">
                 {label}
               </p>
-              <p className="text-sm font-semibold text-gray-800 wrap-break-word">
+              <p className="text-xs font-semibold text-gray-800 wrap-break-word">
                 {value}
               </p>
             </div>

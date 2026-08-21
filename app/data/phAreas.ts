@@ -49,7 +49,7 @@ export const areaToZone = {
   "Choba": 4,
   "Mgbogba": 4,
   "Uniport": 4,
-  "Obureikwere": 4,
+  "Obiri-ikwerre": 4,
   "Obiri Ikwerre": 4,
   "Aluu": 4,
   "Aluu Junction": 4,
@@ -127,7 +127,6 @@ export const areaToZone = {
 
   // ===== Zone 10 (Obio-Akpor — Mile 4 / Ada George axis) =====
   "Mile 4": 10,
-  "ACUP": 10,
   "Ada George": 10,
   "Whimpey": 10,
   "Wimpey": 10,

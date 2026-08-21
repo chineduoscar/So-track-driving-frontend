@@ -39,13 +39,18 @@ const CONTACT_INFO = [
     href: "tel:08037466270",
   },
   {
+    icon: <FiPhone className="text-[#00a057]" />,
+    text: "07039597679",
+    href: "tel:07039597679",
+  },
+  {
     icon: <FiMail className="text-[#00a057]" />,
     text: "sotrackdrivingschool@gmail.com",
     href: "mailto:sotrackdrivingschool@gmail.com",
   },
   {
     icon: <FiMapPin className="text-[#00a057]" />,
-    text: "Port Harcourt, Rivers State",
+    text: "Block C / Store 17/20, Obidave Plaza, By JDP Roundabout, 202 Peter Odili Rd, Port Harcourt 500003, Rivers",
     href: "https://maps.app.goo.gl/DjiBpGeKdDkmY2FW8",
   },
 ];
@@ -138,10 +143,10 @@ const Footer = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 text-white/65 hover:text-white text-sm transition-colors duration-150"
+                    className="flex items-start gap-2.5 text-white/65 hover:text-white text-sm transition-colors duration-150"
                   >
-                    <span className="text-base shrink-0">{icon}</span>
-                    {text}
+                    <span className="text-base shrink-0 mt-0.5">{icon}</span>
+                    <span>{text}</span>
                   </a>
                 </li>
               ))}
